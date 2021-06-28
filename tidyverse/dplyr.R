@@ -31,3 +31,28 @@ jan1 <- flights |>
 # Flights department in November or December
 flights |> 
   filter(month == 11 | month == 12)
+
+# Flights that weren't delayed (on arrival or departure) by more than two hours
+flights |> 
+  filter(!(arr_delay > 120 | dep_delay > 120))
+# or
+flights |> 
+  filter(arr_delay <= 120 & dep_delay <= 120)
+
+# create a tibble with NA value in them
+df <- tibble(x = c(1, NA, 3))
+# now, select rows with NA
+df |> 
+  filter(is.na(x))
+
+# Find all the flights had an arrival delay of two or more hours
+View(flights |> 
+  filter(arr_delay >= 2))
+
+# Flights which flew to Houston (IAH or HOU)
+flights |> 
+  filter(dest == "IAH" | dest == "HOU")
+
+# flights operated by United, American, or Delta
+flights |> 
+  filter(carrier %in% c("UA", "AA", "DL"))
