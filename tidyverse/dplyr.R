@@ -56,3 +56,35 @@ flights |>
 # flights operated by United, American, or Delta
 flights |> 
   filter(carrier %in% c("UA", "AA", "DL"))
+
+# flights departed in summer (July, August, and September)
+flights |> 
+  filter(month %in% c(7,8,9))
+
+# Arrived more than two hours late, but didn’t leave late
+flights |> 
+  filter(arr_delay >= 120 & dep_delay <= 0)
+
+# Were delayed by at least an hour, but made up over 30 minutes in flight
+flights |> 
+  filter(arr_delay >= 60 & (dep_time - sched_dep_time)>= 30)
+
+# Departed between midnight and 6 a.m. (inclusive)
+flights |> 
+  filter(dep_time >= 1 & dep_time <= 6)
+# or
+flights |> 
+  filter(between(dep_time, 1, 6))
+
+# How many flights have a missing dep_time
+flights |> 
+  filter(is.na(dep_time))
+
+#### Arrange ####
+# reorder by a column in descending order
+View(flights |> 
+  arrange(desc(arr_delay)))
+
+
+
+
